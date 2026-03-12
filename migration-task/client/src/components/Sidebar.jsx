@@ -24,7 +24,7 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
     <motion.aside
       initial={false}
       animate={{ width: isCollapsed ? '80px' : '280px' }}
-      className="relative z-50 h-screen bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-white/5 flex flex-col transition-all duration-300"
+      className="fixed top-0 left-0 z-50 h-screen bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-white/5 flex flex-col transition-all duration-300"
     >
       {/* Logo */}
       <div className="h-20 flex items-center px-6">

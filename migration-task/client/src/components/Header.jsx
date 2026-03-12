@@ -12,12 +12,15 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Header({ isDarkMode, setIsDarkMode }) {
+export default function Header({ isDarkMode, setIsDarkMode, isSidebarCollapsed }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   return (
-    <header className="h-20 border-b border-slate-200 dark:border-white/5 bg-white/50 dark:bg-[#0f172a]/50 backdrop-blur-xl flex items-center justify-between px-8 relative z-40 transition-colors duration-300">
+    <header 
+      style={{ left: isSidebarCollapsed ? '80px' : '280px' }}
+      className="fixed top-0 right-0 h-20 border-b border-slate-200 dark:border-white/5 bg-white/50 dark:bg-[#0f172a]/50 backdrop-blur-xl flex items-center justify-between px-8 z-40 transition-all duration-300"
+    >
       {/* Left side: Search Context */}
       <div className="flex items-center space-x-4">
         <div className="relative group hidden md:block">

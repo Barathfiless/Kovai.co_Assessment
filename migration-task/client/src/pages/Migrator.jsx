@@ -554,13 +554,17 @@ export default function Migrator() {
         setIsCollapsed={setIsSidebarCollapsed} 
       />
 
-      <div className="flex-1 flex flex-col min-h-screen relative z-10 overflow-hidden">
+      <div 
+        className="flex-1 flex flex-col min-h-screen relative z-10 transition-all duration-300"
+        style={{ paddingLeft: isSidebarCollapsed ? '80px' : '280px' }}
+      >
         <Header 
           isDarkMode={isDarkMode} 
           setIsDarkMode={setIsDarkMode} 
+          isSidebarCollapsed={isSidebarCollapsed}
         />
 
-        <main className="flex-1 overflow-y-auto p-8 lg:p-12">
+        <main className="flex-1 p-8 lg:p-12 mt-20">
           <div className="max-w-7xl mx-auto">
             {/* Header Content */}
             <div className="mb-12">
