@@ -161,6 +161,13 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
     html   = []
     # list_stack: list of (tag, level) currently open
     stack  = []
+    in_code = False
+
+    def close_code():
+        nonlocal in_code
+        if in_code:
+            html.append("</code></pre>")
+            in_code = False
 
     def close_stack_to(target_level: int):
         """Close list tags deeper than target_level."""
@@ -169,6 +176,7 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
             html.append(f"</{tag}>")
 
     def close_all():
+        close_code()
         while stack:
             tag, _ = stack.pop()
             html.append(f"</{tag}>")
@@ -198,8 +206,30 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
             para       = para_list[para_index]
             para_index += 1
             style      = para.style.name
-            inline     = _para_inline_html(para, rels)
             raw_text   = para.text.strip()
+            
+            # Detect if this is a code block (Courier font)
+            is_code_para = False
+            first_run = para._p.find(qn("w:r"))
+            if first_run is not None and _is_courier(first_run):
+                is_code_para = True
+
+            # ── Code block grouping ───────────────────────────────────────────
+            if is_code_para:
+                if not in_code:
+                    close_all() # close any open lists
+                    html.append("<pre><code>")
+                    in_code = True
+                else:
+                    html.append("\n") # Add newline between code paragraphs
+                
+                code_text = _para_inline_html(para, rels, is_code_block=True)
+                html.append(code_text)
+                continue
+            else:
+                close_code() # Close code block if we hit something else
+
+            inline     = _para_inline_html(para, rels)
 
             # ── Heading ───────────────────────────────────────────────────────
             if style.startswith("Heading"):
@@ -236,12 +266,6 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
                     # same level — just add item (tag change is ignored; valid HTML)
 
                 html.append(f"<li>{inline}</li>")
-
-            # ── Code block (Courier font) ──────────────────────────────────────
-            elif _is_courier(para._p.find(qn("w:r"))) if para._p.find(qn("w:r")) is not None else False:
-                close_all()
-                code_text = _para_inline_html(para, rels, is_code_block=True)
-                html.append(f"<pre><code>{code_text.strip()}</code></pre>")
 
             # ── Image paragraph ───────────────────────────────────────────────
             elif para._p.findall(".//" + qn("w:drawing")):
