@@ -10,7 +10,17 @@ DocuSync is a professional-grade migration platform designed to seamlessly trans
 - ** Real-time Streaming**: Pulse-driven progress tracking via Server-Sent Events (SSE).
 - ** Adaptive UI**: Premium enterprise dashboard with full Light/Dark mode support and glassmorphism aesthetics.
 - ** Secure Operations**: Encrypted API configuration and local-first document processing.
-- ** Developer-First**: Clean Python backend and a modern React + Vite frontend.
+- **Developer-First**: Clean Python backend and a modern React + Vite frontend.
+
+---
+
+##  Dashboard Overview
+
+![DocuSync Premium Dashboard](assets/dashboard.png)
+*Figure 1: Enterprise-grade migration dashboard with real-time SSE progress tracking*
+
+![Migration Success State](assets/migration_success.png)
+*Figure 2: Successful migration state with article validation and download options*
 
 ---
 
