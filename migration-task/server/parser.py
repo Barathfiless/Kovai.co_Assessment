@@ -106,20 +106,22 @@ def _table_to_html(table) -> str:
     )
 
 
-def _image_to_html(para, rels: dict, images_dir: str) -> str:
+def _image_to_html(para, doc) -> str:
     """Find the drawing in a paragraph and return an <img> tag (base64 embedded)."""
     for drawing in para._p.findall(".//" + qn("w:drawing")):
         for blip in drawing.findall(f".//{{{A_NS}}}blip"):
             r_id = blip.get(f"{{{R_NS}}}embed")
-            if r_id and r_id in rels:
-                img_path = rels[r_id]  # e.g. "media/image1.jpg"
-                full_path = os.path.join(images_dir, os.path.basename(img_path))
-                if os.path.exists(full_path):
-                    ext = os.path.splitext(full_path)[1].lower().lstrip(".")
-                    mime = {"jpg": "jpeg", "jpeg": "jpeg", "png": "png", "gif": "gif"}.get(ext, "jpeg")
-                    with open(full_path, "rb") as f:
-                        b64 = base64.b64encode(f.read()).decode()
-                    return f'<img src="data:image/{mime};base64,{b64}" alt="Document image" style="max-width:100%;height:auto;">'
+            if r_id and r_id in para.part.rels:
+                rel = para.part.rels[r_id]
+                image_part = rel.target_part
+                
+                # Get extension and mime type
+                ext = image_part.content_type.split("/")[-1]
+                mime = {"jpeg": "jpeg", "jpg": "jpeg", "png": "png", "gif": "gif"}.get(ext, "jpeg")
+                
+                # Encode binary data to base64
+                b64 = base64.b64encode(image_part.blob).decode()
+                return f'<img src="data:image/{mime};base64,{b64}" alt="Document image" style="max-width:100%;height:auto;border-radius:8px;margin:20px 0;display:block;">'
     return ""
 
 
@@ -244,7 +246,7 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
             # ── Image paragraph ───────────────────────────────────────────────
             elif para._p.findall(".//" + qn("w:drawing")):
                 close_all()
-                img_html = _image_to_html(para, rels, images_dir)
+                img_html = _image_to_html(para, doc)
                 if img_html:
                     html.append(img_html)
 

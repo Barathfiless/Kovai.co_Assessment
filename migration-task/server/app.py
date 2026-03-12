@@ -125,7 +125,7 @@ def run_pipeline(job_id: str, docx_path: str, title: str,
 
         emit("step", step=2, status="done",
              message=f"HTML generated — {html_bytes:,} bytes")
-        emit("html_preview", html=body_html[:4000])   # first 4KB for preview
+        emit("html_preview", html=body_html)   # send full HTML for preview
 
         # ── Step 3: Upload ────────────────────────────────────────────────────
         if dry_run:

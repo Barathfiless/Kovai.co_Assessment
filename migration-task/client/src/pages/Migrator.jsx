@@ -308,10 +308,10 @@ export default function Migrator() {
         </motion.div>
       </div>
 
-      {/* Progress & Preview */}
-      <div className="lg:col-span-7 space-y-6">
+      {/* Progress Card (Moved here) */}
+      <div className="lg:col-span-5 space-y-6">
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="glass-card rounded-3xl p-8"
         >
@@ -402,24 +402,19 @@ export default function Migrator() {
                   <Download size={16} className="inline mr-2" />
                   <span className="text-sm font-semibold">Download HTML</span>
                 </a>
-                {result.slug && (
-                  <button 
-                    className="flex-1 bg-blue-600 hover:bg-blue-500 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg shadow-blue-500/20"
-                  >
-                    <ExternalLink size={16} />
-                    <span className="text-sm font-semibold text-white">View Article</span>
-                  </button>
-                )}
               </div>
             </motion.div>
           )}
         </motion.div>
+      </div>
 
+      {/* HTML Preview (Right Side Only) */}
+      <div className="lg:col-span-7 space-y-6">
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass-card rounded-3xl p-8"
+          className="glass-card rounded-3xl p-8 h-full min-h-[600px] flex flex-col"
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
@@ -431,18 +426,21 @@ export default function Migrator() {
             {previewHtml && <span className="text-xs text-slate-500 font-mono">LIVE RENDER</span>}
           </div>
 
-          <div className="relative group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden h-[400px]">
+          <div className="relative group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex-1">
             {previewHtml ? (
               <div 
-                className="p-6 h-full overflow-y-auto prose prose-invert prose-blue max-w-none"
+                className="p-8 h-full overflow-y-auto prose prose-blue dark:prose-invert max-w-none scroll-smooth"
                 dangerouslySetInnerHTML={{ __html: previewHtml }}
               />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-slate-600 space-y-3">
-                <div className="p-4 rounded-full bg-slate-800/50">
-                  <FileText size={32} />
+              <div className="flex flex-col items-center justify-center h-full text-slate-600 dark:text-slate-500 space-y-4">
+                <div className="p-6 rounded-full bg-slate-100 dark:bg-slate-800/50">
+                  <FileText size={48} className="animate-pulse" />
                 </div>
-                <p className="text-sm font-medium">Ready to render preview</p>
+                <div className="text-center">
+                  <p className="text-lg font-bold">Waiting for Document...</p>
+                  <p className="text-sm">Upload a .docx to see the live HTML conversion</p>
+                </div>
               </div>
             )}
             
