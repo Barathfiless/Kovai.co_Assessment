@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>docx_migration_test_file</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; color: #1a1a2e;
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+    }
+    h1 { font-size: 2rem;   border-bottom: 3px solid #4361ee; padding-bottom: 10px; margin-bottom: 24px; }
+    h2 { font-size: 1.5rem; border-bottom: 1px solid #dee2e6; padding-bottom: 6px;  margin-top: 40px; color: #16213e; }
+    h3 { font-size: 1.2rem; color: #0f3460; margin-top: 28px; }
+    h4 { font-size: 1rem;   color: #495057; margin-top: 20px; }
+    p  { margin: 12px 0; }
+    a  { color: #4361ee; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { padding-left: 28px; margin: 10px 0; }
+    li { margin: 5px 0; line-height: 1.6; }
+    table.doc-table {
+      border-collapse: collapse; width: 100%; margin: 20px 0;
+      font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    table.doc-table th {
+      background: #4361ee; color: #fff;
+      padding: 10px 14px; text-align: left; font-weight: 600;
+    }
+    table.doc-table td {
+      padding: 9px 14px; border-bottom: 1px solid #dee2e6;
+    }
+    table.doc-table tr:last-child td { border-bottom: none; }
+    table.doc-table tr:nth-child(even) td { background: #f8f9fc; }
+    pre {
+      background: #1e1e2e; color: #cdd6f4;
+      border-radius: 8px; padding: 20px; overflow-x: auto;
+      font-family: "Courier New", monospace; font-size: 0.875rem;
+      line-height: 1.6; margin: 20px 0;
+      border-left: 4px solid #4361ee;
+    }
+  </style>
+</head>
+<body>
+<h1>Sample Document for Migration Assessment</h1>
+<h2>1. Introduction</h2>
+<p><strong>This document is designed to test complex document structures used in documentation migrations. </strong>It includes multiple formatting types such as <em>italic text</em>, lists, tables, hyperlinks, and code blocks.</p>
+<h2>2. Nested Bullet Lists</h2>
+<ul>
+<li>Main Feature 1</li>
+<ul>
+<li>Sub Feature 1.1</li>
+<li>Sub Feature 1.2</li>
+</ul>
+</ul>
+<ul>
+<li>Main Feature 2</li>
+<ul>
+<li>Sub Feature 2.1</li>
+</ul>
+</ul>
+<h2>3. Nested Numbered Lists</h2>
+<h3>Numbered List Example</h3>
+<p><strong>This document is designed to test complex document structures used in documentation migrations. </strong>It includes multiple formatting types such as <em>italic text</em>, lists, tables, hyperlinks, and code blocks.</p>
+<h4>Numbered List Example for your reference</h4>
+<ol>
+<li>Step 1: Prepare environment</li>
+<ol>
+<li>Step 1.1: Install dependencies</li>
+<li>Step 1.2: Configure settings</li>
+</ol>
+</ol>
+<ol>
+<li>Step 2: Execute migration</li>
+<ol>
+<li>Step 2.1: Validate results</li>
+<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+</ol>
+</ol>
+<h2>4. Feature Comparison Table</h2>
+<table class="doc-table">
+<thead><tr><th>Feature</th><th>Description</th><th>Supported</th></tr></thead>
+<tbody><tr><td>Headings</td><td>Multiple heading levels</td><td>Yes</td></tr>
+<tr><td>Lists</td><td>Bullet and numbered lists</td><td>Yes</td></tr>
+<tr><td>Tables</td><td>Structured data representation</td><td>Yes</td></tr>
+<tr><td>Images</td><td>Embedded visuals</td><td>Optional</td></tr></tbody>
+</table>
+<h2>5. Migration Status Table</h2>
+<table class="doc-table">
+<thead><tr><th>Article ID</th><th>Title</th><th>Migration Status</th><th>Remarks</th></tr></thead>
+<tbody><tr><td>A101</td><td>Getting Started Guide</td><td>Completed</td><td>Validated</td></tr>
+<tr><td>A102</td><td>Installation Steps</td><td>In Progress</td><td>Formatting review pending</td></tr>
+<tr><td>A103</td><td>API Integration</td><td>Pending</td><td>Awaiting customer confirmation</td></tr></tbody>
+</table>
+<h2>6. Hyperlinks</h2>
+<p>Useful documentation resources: <a href="https://learn.microsoft.com" target="_blank"><u>Microsoft Learn</u></a></p>
+<p>Another useful resource is OpenAI: https://www.openai.com</p>
+<h2>7. Code Block Example</h2>
+<pre><code>public static void Main(string[] args)
+{
+    Console.WriteLine(&quot;Hello World&quot;);
+}</code></pre>
+<h2>8. Image Section</h2>
+<p>Image placeholder:</p>
+<p class="caption"><em>Figure </em></p>
+<h2>9. Conclusion</h2>
+<p>This advanced test document contains nested lists, multiple tables, hyperlinks, and formatted text. It is suitable for validating document parsing, HTML conversion, or knowledge base migration scripts.</p>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p>End of the Sample Documentation. All the best.</p>
+</body>
+</html>
