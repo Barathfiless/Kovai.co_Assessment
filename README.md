@@ -77,6 +77,7 @@ The dashboard allows on-the-fly configuration, but for CLI usage, set:
 
 ---
 
+
 ##  Element Mapping
 
 | Word Element | HTML Mapping | CSS Features |
