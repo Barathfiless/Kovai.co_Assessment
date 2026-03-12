@@ -578,18 +578,7 @@ export default function Migrator() {
                   <h1 className="text-4xl font-extrabold font-outfit mb-3 text-slate-900 dark:text-white">
                     {activeTab === 'upload' ? 'Upload Documents' : 'Migration History'}
                   </h1>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">
-                    {activeTab === 'upload' 
-                      ? 'Process your .docx files and synchronize them with Document360.' 
-                      : 'Review and manage your past document migrations.'}
-                  </p>
                 </div>
-                {activeTab === 'upload' && (
-                  <div className="hidden sm:flex items-center space-x-2 px-4 py-2 bg-blue-500/10 rounded-xl border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider h-fit">
-                    <ShieldCheck size={14} />
-                    <span>SDK Enterprise Active</span>
-                  </div>
-                )}
               </motion.div>
             </div>
 
