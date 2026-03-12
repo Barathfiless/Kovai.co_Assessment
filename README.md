@@ -1,20 +1,20 @@
-# 🚀 DocuSync: Enterprise Content Migration Suite
+# DocuSync
 
 DocuSync is a professional-grade migration platform designed to seamlessly transition Microsoft Word documentation into **Document360** knowledge bases. It combines a powerful CLI pipeline with a premium, real-time React dashboard.
 
 ---
 
-## ✨ Features
+##  Features
 
-- **🎯 Precision Parsing**: Advanced `.docx` to HTML conversion preserving tables, nested lists, images (base64), and rich formatting.
-- **⚡ Real-time Streaming**: Pulse-driven progress tracking via Server-Sent Events (SSE).
-- **🌓 Adaptive UI**: Premium enterprise dashboard with full Light/Dark mode support and glassmorphism aesthetics.
-- **🔐 Secure Operations**: Encrypted API configuration and local-first document processing.
-- **🛠️ Developer-First**: Clean Python backend and a modern React + Vite frontend.
+- ** Precision Parsing**: Advanced `.docx` to HTML conversion preserving tables, nested lists, images (base64), and rich formatting.
+- ** Real-time Streaming**: Pulse-driven progress tracking via Server-Sent Events (SSE).
+- ** Adaptive UI**: Premium enterprise dashboard with full Light/Dark mode support and glassmorphism aesthetics.
+- ** Secure Operations**: Encrypted API configuration and local-first document processing.
+- ** Developer-First**: Clean Python backend and a modern React + Vite frontend.
 
 ---
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 ```
 Kovai/
@@ -33,7 +33,7 @@ Kovai/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Prerequisites
 - Python 3.10+
@@ -68,7 +68,7 @@ The dashboard allows on-the-fly configuration, but for CLI usage, set:
 
 ---
 
-## 📦 Tech Stack
+##  Tech Stack
 
 - **Frontend**: React 18, Vite, Tailwind CSS, Framer Motion, Lucide Icons.
 - **Backend**: Flask, SSE (Server-Sent Events), Python-Docx.
@@ -76,8 +76,7 @@ The dashboard allows on-the-fly configuration, but for CLI usage, set:
 - **Conversion Engine**: Custom LXML-based Word-to-HTML pipeline.
 
 ---
-
-## 📝 Element Mapping
+##  Element Mapping
 
 | Word Element | HTML Mapping | CSS Features |
 |---|---|---|
