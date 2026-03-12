@@ -330,71 +330,6 @@ export default function Migrator() {
             </motion.div>
           )}
         </motion.div>
-
-        {/* API Configuration Section */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass-card rounded-3xl p-8"
-        >
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400">
-              <Settings size={20} />
-            </div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">API Configuration</h2>
-          </div>
-
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">API Token</label>
-              <input 
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Document360 API Token"
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all font-mono text-sm text-slate-900 dark:text-white"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">User ID</label>
-              <input 
-                type="text"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-                placeholder="User ID"
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all text-sm text-slate-900 dark:text-white"
-              />
-            </div>
-          </div>
-
-          <button 
-            onClick={startMigration}
-            disabled={!file || status === 'uploading' || status === 'streaming'}
-            className={cn(
-              "w-full mt-8 py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 transition-all shadow-lg",
-              status === 'uploading' || status === 'streaming' 
-                ? "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed" 
-                : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] text-white shadow-blue-500/20"
-            )}
-          >
-            {status === 'idle' && (
-              <>
-                <span>Start Migration</span>
-                <Rocket size={18} />
-              </>
-            )}
-            {(status === 'uploading' || status === 'streaming') && (
-              <>
-                <Loader2 size={18} className="animate-spin" />
-                <span>Processing...</span>
-              </>
-            )}
-            {status === 'done' && <span>Restart</span>}
-            {status === 'error' && <span>Retry Migration</span>}
-          </button>
-        </motion.div>
       </div>
 
       {/* HTML Preview (Right Column) */}
@@ -559,13 +494,73 @@ export default function Migrator() {
                 key={activeTab}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-end justify-between"
+                className="flex flex-col lg:flex-row lg:items-center justify-between gap-6"
               >
                 <div>
-                  <h1 className="text-4xl font-extrabold font-outfit mb-3 text-slate-900 dark:text-white">
+                  <h1 className="text-4xl font-extrabold font-outfit text-slate-900 dark:text-white">
                     {activeTab === 'upload' ? 'Upload Documents' : 'Migration History'}
                   </h1>
                 </div>
+
+                {activeTab === 'upload' && (
+                  <div className="flex flex-wrap items-center gap-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-3 px-5 rounded-2xl border border-white/20 dark:border-slate-800/50 shadow-xl">
+                    <div className="flex items-center space-x-2">
+                      <Settings size={14} className="text-indigo-500" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">API Config</span>
+                    </div>
+
+                    <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2 hidden sm:block" />
+
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 whitespace-nowrap">API Key</span>
+                        <input 
+                          type="password"
+                          value={apiKey}
+                          onChange={(e) => setApiKey(e.target.value)}
+                          placeholder="••••••••"
+                          className="bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs focus:ring-1 focus:ring-indigo-500 outline-none w-40 font-mono text-slate-700 dark:text-slate-300 transition-all focus:bg-white dark:focus:bg-slate-900"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 whitespace-nowrap">User ID</span>
+                        <input 
+                          type="text"
+                          value={userId}
+                          onChange={(e) => setUserId(e.target.value)}
+                          placeholder="ID..."
+                          className="bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs focus:ring-1 focus:ring-indigo-500 outline-none w-32 text-slate-700 dark:text-slate-300 transition-all focus:bg-white dark:focus:bg-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={startMigration}
+                      disabled={!file || status === 'uploading' || status === 'streaming'}
+                      className={cn(
+                        "px-6 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shadow-lg hover:scale-[1.02] active:scale-95",
+                        status === 'uploading' || status === 'streaming' 
+                          ? "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed" 
+                          : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-500/20"
+                      )}
+                    >
+                      {status === 'idle' && (
+                        <>
+                          <span>Sync</span>
+                          <Rocket size={14} />
+                        </>
+                      )}
+                      {(status === 'uploading' || status === 'streaming') && (
+                        <>
+                          <Loader2 size={12} className="animate-spin" />
+                          <span>Working...</span>
+                        </>
+                      )}
+                      {status === 'done' && <span>Sync Again</span>}
+                      {status === 'error' && <span>Retry</span>}
+                    </button>
+                  </div>
+                )}
               </motion.div>
             </div>
 
