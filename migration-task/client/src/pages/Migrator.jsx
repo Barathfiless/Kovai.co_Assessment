@@ -149,8 +149,9 @@ export default function Migrator() {
 
   const renderUploadContent = () => (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      {/* Configuration & Upload */}
+      {/* Left Column: Upload, Progress, API Config */}
       <div className="lg:col-span-5 space-y-6">
+        {/* Upload Document */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -185,7 +186,7 @@ export default function Migrator() {
                   <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 mb-3">
                     <FileText size={24} />
                   </div>
-                  <p className="font-medium text-slate-100 truncate max-w-full px-4">{file.name}</p>
+                  <p className="font-medium text-slate-900 dark:text-slate-100 truncate max-w-full px-4">{file.name}</p>
                   <p className="text-sm text-slate-500 mt-1">{(file.size / 1024).toFixed(1)} KB</p>
                 </div>
               ) : (
@@ -193,7 +194,7 @@ export default function Migrator() {
                   <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 dark:text-slate-500 mb-3 group-hover:text-blue-600 dark:group-hover:text-slate-300 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 transition-colors">
                     <Upload size={24} />
                   </div>
-                  <p className="font-medium text-slate-300">Click to upload or drag & drop</p>
+                  <p className="font-medium text-slate-400 dark:text-slate-300">Click to upload or drag & drop</p>
                   <p className="text-sm text-slate-500 mt-1">Microsoft Word (.docx) only</p>
                 </div>
               )}
@@ -231,88 +232,11 @@ export default function Migrator() {
           </div>
         </motion.div>
 
+        {/* Migration Progress Section */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass-card rounded-3xl p-8"
-        >
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400">
-              <Settings size={20} />
-            </div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">API Configuration</h2>
-          </div>
-
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">API Token</label>
-              <input 
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Document360 API Token"
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all font-mono text-sm text-slate-900 dark:text-white"
-              />
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">Project ID</label>
-                <input 
-                  type="text"
-                  value={projectId}
-                  onChange={(e) => setProjectId(e.target.value)}
-                  placeholder="Project ID"
-                  className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all text-sm text-slate-900 dark:text-white"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">User ID</label>
-                <input 
-                  type="text"
-                  value={userId}
-                  onChange={(e) => setUserId(e.target.value)}
-                  placeholder="User ID"
-                  className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all text-sm text-slate-900 dark:text-white"
-                />
-              </div>
-            </div>
-          </div>
-
-          <button 
-            onClick={startMigration}
-            disabled={!file || status === 'uploading' || status === 'streaming'}
-            className={cn(
-              "w-full mt-8 py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 transition-all shadow-lg",
-              status === 'uploading' || status === 'streaming' 
-                ? "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed" 
-                : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] text-white shadow-blue-500/20"
-            )}
-          >
-            {status === 'idle' && (
-              <>
-                <span>Start Migration</span>
-                <Rocket size={18} />
-              </>
-            )}
-            {(status === 'uploading' || status === 'streaming') && (
-              <>
-                <Loader2 size={18} className="animate-spin" />
-                <span>Processing...</span>
-              </>
-            )}
-            {status === 'done' && <span>Restart</span>}
-            {status === 'error' && <span>Retry Migration</span>}
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Progress Card (Moved here) */}
-      <div className="lg:col-span-5 space-y-6">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
           className="glass-card rounded-3xl p-8"
         >
           <div className="flex items-center space-x-3 mb-8">
@@ -350,7 +274,7 @@ export default function Migrator() {
                         "font-bold transition-colors",
                         step.status === 'pending' ? "text-slate-400 dark:text-slate-500" : "text-slate-900 dark:text-slate-100"
                       )}>{step.name}</h3>
-                      {step.status === 'done' && <span className="text-xs text-emerald-500 font-medium">COMPLETE</span>}
+                      {step.status === 'done' && <span className="text-xs text-emerald-500 font-medium tracking-wider font-bold">COMPLETE</span>}
                     </div>
                     <p className="text-sm text-slate-500 mt-1">{step.message}</p>
                   </div>
@@ -376,45 +300,110 @@ export default function Migrator() {
               animate={{ opacity: 1, scale: 1 }}
               className="mt-8 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl space-y-4"
             >
-              <div className="flex items-center space-x-3 text-emerald-400 font-bold">
+              <div className="flex items-center space-x-3 text-emerald-600 dark:text-emerald-400 font-bold">
                 <CheckCircle2 size={24} />
-                <span>Migration Successful!</span>
+                <span className="text-lg">Migration Successful!</span>
               </div>
               
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-white/50 dark:bg-slate-900/40 p-3 rounded-xl border border-emerald-500/10 dark:border-transparent">
-                  <p className="text-slate-500 mb-1 font-medium">HTML Size</p>
-                  <p className="font-mono text-emerald-600 dark:text-emerald-400">{(result.html_size / 1024).toFixed(1)} KB</p>
+              <div className="grid grid-cols-2 gap-4 text-sm mt-4">
+                <div className="bg-white dark:bg-slate-900/60 p-4 rounded-2xl border border-emerald-500/10">
+                  <p className="text-slate-500 dark:text-slate-500 mb-1 font-medium">HTML Size</p>
+                  <p className="font-mono text-emerald-600 dark:text-emerald-400 text-lg">{(result.html_size / 1024).toFixed(1)} KB</p>
                 </div>
-                {result.article_id && (
-                  <div className="bg-white/50 dark:bg-slate-900/40 p-3 rounded-xl border border-emerald-500/10 dark:border-transparent">
-                    <p className="text-slate-500 mb-1 font-medium">Article ID</p>
-                    <p className="font-mono text-emerald-600 dark:text-emerald-400">{result.article_id.substring(0, 8)}...</p>
-                  </div>
-                )}
+                <div className="bg-white dark:bg-slate-900/60 p-4 rounded-2xl border border-emerald-500/10">
+                  <p className="text-slate-500 dark:text-slate-500 mb-1 font-medium">Article ID</p>
+                  <p className="font-mono text-emerald-600 dark:text-emerald-400 text-lg">
+                    {result.article_id ? `${result.article_id.substring(0, 8)}...` : 'N/A (Dry Run)'}
+                  </p>
+                </div>
               </div>
 
-              <div className="flex space-x-3 pt-2">
+              <div className="pt-4">
                 <a 
                   href={`http://localhost:5000/download/${jobId}`}
-                  className="flex-1 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white font-bold shadow-sm"
+                  className="w-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 py-4 rounded-2xl flex items-center justify-center space-x-2 transition-all border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white font-bold shadow-sm"
                 >
-                  <Download size={16} className="inline mr-2" />
-                  <span className="text-sm font-semibold">Download HTML</span>
+                  <Download size={18} />
+                  <span>Download HTML</span>
                 </a>
               </div>
             </motion.div>
           )}
         </motion.div>
+
+        {/* API Configuration Section */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+          className="glass-card rounded-3xl p-8"
+        >
+          <div className="flex items-center space-x-3 mb-6">
+            <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400">
+              <Settings size={20} />
+            </div>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">API Configuration</h2>
+          </div>
+
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">API Token</label>
+              <input 
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="Document360 API Token"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all font-mono text-sm text-slate-900 dark:text-white"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">User ID</label>
+              <input 
+                type="text"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                placeholder="User ID"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all text-sm text-slate-900 dark:text-white"
+              />
+            </div>
+          </div>
+
+          <button 
+            onClick={startMigration}
+            disabled={!file || status === 'uploading' || status === 'streaming'}
+            className={cn(
+              "w-full mt-8 py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 transition-all shadow-lg",
+              status === 'uploading' || status === 'streaming' 
+                ? "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed" 
+                : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] text-white shadow-blue-500/20"
+            )}
+          >
+            {status === 'idle' && (
+              <>
+                <span>Start Migration</span>
+                <Rocket size={18} />
+              </>
+            )}
+            {(status === 'uploading' || status === 'streaming') && (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+                <span>Processing...</span>
+              </>
+            )}
+            {status === 'done' && <span>Restart</span>}
+            {status === 'error' && <span>Retry Migration</span>}
+          </button>
+        </motion.div>
       </div>
 
-      {/* HTML Preview (Right Side Only) */}
-      <div className="lg:col-span-7 space-y-6">
+      {/* HTML Preview (Right Column) */}
+      <div className="lg:col-span-7 h-full">
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass-card rounded-3xl p-8 h-full min-h-[600px] flex flex-col"
+          transition={{ delay: 0.1 }}
+          className="glass-card rounded-3xl p-8 h-full sticky top-[104px] flex flex-col"
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
