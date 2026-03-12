@@ -347,7 +347,20 @@ export default function Migrator() {
               </div>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">HTML Preview</h2>
             </div>
-            {previewHtml && <span className="text-xs text-slate-500 font-mono">LIVE RENDER</span>}
+            <div className="flex items-center space-x-4">
+              {jobId && (
+                <motion.a 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  href={`http://localhost:5000/download/${jobId}`}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-xl text-xs font-bold transition-all border border-blue-500/20 shadow-sm"
+                >
+                  <Download size={14} />
+                  <span>Download HTML</span>
+                </motion.a>
+              )}
+              {previewHtml && <span className="text-xs text-slate-500 font-mono tracking-wider opacity-60">LIVE RENDER</span>}
+            </div>
           </div>
 
           <div className="relative group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex-1">
