@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuSync_BARATH_M</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; color: #1a1a2e;
+      max-width: 900px; margin: 48px auto; padding: 0 24px;
+    }
+    h1 { font-size: 2rem;   border-bottom: 3px solid #4361ee; padding-bottom: 10px; margin-bottom: 24px; }
+    h2 { font-size: 1.5rem; border-bottom: 1px solid #dee2e6; padding-bottom: 6px;  margin-top: 40px; color: #16213e; }
+    h3 { font-size: 1.2rem; color: #0f3460; margin-top: 28px; }
+    h4 { font-size: 1rem;   color: #495057; margin-top: 20px; }
+    p  { margin: 12px 0; }
+    a  { color: #4361ee; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { padding-left: 28px; margin: 10px 0; }
+    li { margin: 5px 0; line-height: 1.6; }
+    table.doc-table {
+      border-collapse: collapse; width: 100%; margin: 20px 0;
+      font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    table.doc-table th {
+      background: #4361ee; color: #fff;
+      padding: 10px 14px; text-align: left; font-weight: 600;
+    }
+    table.doc-table td {
+      padding: 9px 14px; border-bottom: 1px solid #dee2e6;
+    }
+    table.doc-table tr:last-child td { border-bottom: none; }
+    table.doc-table tr:nth-child(even) td { background: #f8f9fc; }
+    pre {
+      background: #1e1e2e; color: #cdd6f4;
+      border-radius: 8px; padding: 20px; overflow-x: auto;
+      font-family: "Courier New", monospace; font-size: 0.875rem;
+      line-height: 1.6; margin: 20px 0;
+      border-left: 4px solid #4361ee;
+    }
+  </style>
+</head>
+<body>
+<h1><strong>BARATH M</strong></h1>
+<p><strong>DocuSync: Enterprise Content Migration Suite</strong></p>
+<h2><strong>1. Introduction</strong></h2>
+<p><strong>DocuSync</strong> is a high-performance migration engine designed for enterprises transitioning from legacy Microsoft Word documentation to the <strong>Document360</strong> knowledge base. This project provides a complete end-to-end solution, including a robust Python-based parsing engine and a modern React dashboard for real-time migration tracking.</p>
+<h2><strong>2. Platform Core Features</strong></h2>
+<p>DocuSync is built on four pillars of enterprise documentation management:</p>
+<ul>
+<li><strong>Precision Conversion Engine</strong></li>
+<li>High-fidelity .docx to HTML transformation.</li>
+<li>Preserves complex structures like nested lists, multi-level headings, and inline styling.</li>
+<li>Automatic Base64 encoding for embedded images to ensure seamless transport.</li>
+<li><strong>Enterprise-Grade Architecture</strong></li>
+<li><strong>Client-Side</strong>: A Vite-powered React application using Framer Motion for smooth transitions.</li>
+<li><strong>Server-Side</strong>: A Flask-based REST API with event-driven processing.</li>
+<li><strong>Real-Time Visibility</strong></li>
+<li>Pulse-driven progress tracking utilizing <strong>Server-Sent Events (SSE)</strong>.</li>
+<li>Instant HTML preview before finalizing the upload to Document360.</li>
+</ul>
+<h2><strong>3. Migration Workflow</strong></h2>
+<h3><strong>Standard Operating Procedure</strong></h3>
+<ul>
+<li><strong>Environment Preparation</strong></li>
+<li><strong>Authentication</strong>: Secure your Document360 API Key and Project Version ID.</li>
+<li><strong>Dependencies</strong>: Ensure Python 3.10+ and Node.js 18+ are installed.</li>
+<li><strong>Initialization</strong>: Activate the virtual environment and install requirements.txt.</li>
+<li><strong>Execution Phase</strong></li>
+<li><strong>Document Upload</strong>: Submit the target .docx file through the Migrator Dashboard.</li>
+<li><strong>Pipeline Processing</strong>: Monitor the SSE stream for parsing and validation stages.</li>
+<li><strong>Validation &amp; Sync</strong></li>
+<li><strong>Result Validation</strong>: Review the generated HTML in the live preview window.</li>
+<li><strong>Finalization</strong>: Confirm the upload to the Document360 cloud environment.</li>
+</ul>
+<h2><strong>4. Technical Comparison</strong></h2>
+<table class="doc-table">
+<thead><tr><th>Component</th><th>Responsibility</th><th>Tech Stack</th></tr></thead>
+<tbody><tr><td>Parser</td><td>Word-to-HTML Conversion</td><td>Python, python-docx, lxml</td></tr>
+<tr><td>Uploader</td><td>Document360 API Integration</td><td>Python requests, JSON REST</td></tr>
+<tr><td>Dashboard</td><td>User Interface &amp; SSE Monitoring</td><td>React 18, Vite, Framer Motion</td></tr>
+<tr><td>Middleware</td><td>Real-time Job Orchestration</td><td>Flask, Python queue</td></tr></tbody>
+</table>
+<h2><strong>5. Element Mapping Specifications</strong></h2>
+<table class="doc-table">
+<thead><tr><th>Word Element</th><th>HTML Mapping</th><th>Migration Status</th><th>Remarks</th></tr></thead>
+<tbody><tr><td>Headings</td><td>&lt;h1&gt; - &lt;h6&gt;</td><td>Supported</td><td>Preserves hierarchy levels</td></tr>
+<tr><td>Nested Lists</td><td>&lt;ul&gt; / &lt;ol&gt;</td><td>Supported</td><td>Support for 3 levels of nesting</td></tr>
+<tr><td>Tables</td><td>&lt;table&gt;</td><td>Supported</td><td>Styled with glassmorphism CSS</td></tr>
+<tr><td>Images</td><td>&lt;img&gt; (Base64)</td><td>Supported</td><td>Embedded directly in content</td></tr></tbody>
+</table>
+<h2><strong>6. Migration Progress</strong></h2>
+<p>The current development status of the DocuSync suite is tracked below:</p>
+<table class="doc-table">
+<thead><tr><th>Module ID</th><th>Task</th><th>Status</th><th>Integration</th></tr></thead>
+<tbody><tr><td>DS-101</td><td>Core Parsing Logic</td><td>Completed</td><td>Validated with Complex Docs</td></tr>
+<tr><td>DS-102</td><td>SSE Streaming API</td><td>Completed</td><td>Pulse-ready</td></tr>
+<tr><td>DS-103</td><td>React Dashboard UI</td><td>In Progress</td><td>Styling refinements pending</td></tr>
+<tr><td>DS-104</td><td>Batch Upload Mode</td><td>Pending</td><td>Awaiting v2 API updates</td></tr></tbody>
+</table>
+<h2><strong>7. Hyperlinks &amp; Resources</strong></h2>
+<ul>
+<li><strong>Project Documentation: </strong><a href="https://apihub.document360.io/" target="_blank">Document360 API v2</a></li>
+<li><strong>Core Library: </strong><a href="https://python-docx.readthedocs.io/" target="_blank">Python-Docx Reference</a></li>
+<li><strong>Architecture Inspiration: </strong><a href="https://learn.microsoft.com/" target="_blank">Microsoft Learn Documentation Patterns</a></li>
+</ul>
+<h2><strong>8. Code Implementation Example</strong></h2>
+<p>The following snippet demonstrates the core logic for identifying code blocks within the Word document structure:</p>
+<pre><code>
+def _is_courier(run_el) -&gt; bool:
+
+
+    &quot;&quot;&quot;Return True if the run uses Courier New (code font).&quot;&quot;&quot;
+
+
+    rPr = run_el.find(qn(&quot;w:rPr&quot;))
+
+
+    if rPr is None:
+
+
+        return False
+
+
+    fonts = rPr.find(qn(&quot;w:rFonts&quot;))
+
+
+    if fonts is None:
+
+
+        return False
+
+
+    ascii_font = fonts.get(qn(&quot;w:ascii&quot;), &quot;&quot;)
+
+
+    return &quot;Courier&quot; in ascii_font
+</code></pre>
+<h2><strong>9. System Architecture</strong></h2>
+<p>Architecture Overview:</p>
+<p><em>[ DocuSync System Architecture Diagram ]</em></p>
+<p><em>Figure 1: High-level overview of the Flask-React SSE Migration Pipeline</em></p>
+<h2><strong>10. Conclusion</strong></h2>
+<p>DocuSync provides a robust framework for complex documentation migrations. By leveraging a custom parsing engine and real-time streaming, it ensures that enterprise knowledge is transitioned with <strong>100% integrity</strong> into the Document360 platform.</p>
+<p>This document serves as a live representation of the project's capabilities and current technical state.</p>
+</body>
+</html>
