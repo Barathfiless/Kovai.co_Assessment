@@ -205,7 +205,7 @@ def docx_to_html(docx_path: str, images_dir: str = None) -> str:
                 continue
             para       = para_list[para_index]
             para_index += 1
-            style      = para.style.name
+            style      = para.style.name if para.style else ""
             raw_text   = para.text.strip()
             
             # Detect if this is a code block (Courier font)
